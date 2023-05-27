@@ -1,40 +1,38 @@
 "use strict";
 1;
-function ajax() {
-  let mainDiv = document.querySelector(".post-Div");
 
-  fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "get",
+let mainDiv = document.querySelector(".post-Div");
+
+fetch("https://jsonplaceholder.typicode.com/posts", {
+  method: "get",
+})
+  .then(function (mosuliinfo) {
+    return mosuliinfo.json();
   })
-    .then(function (mosuliinfo) {
-      return mosuliinfo.json();
-    })
-    .then(function (response) {
-      response.forEach((element) => {
-        createpost(element);
-      });
-      console.log(response);
-    })
-    .catch(function (errorResponse) {
-      console.log(errorResponse);
+  .then(function (response) {
+    response.forEach((element) => {
+      createpost(element);
     });
+    console.log(response);
+  })
+  .catch(function (errorResponse) {
+    console.log(errorResponse);
+  });
 
-  function createpost(item) {
-    let mainPostDiv = document.createElement("div");
-    let h2Teg = document.createElement("h2");
-    h2Teg.innerText = `${item.id}`;
-    let h3Teg = document.createElement("h3");
-    h3Teg.innerText = `${item.title}`;
+function createpost(item) {
+  let mainPostDiv = document.createElement("div");
+  let h2Teg = document.createElement("h2");
+  h2Teg.innerText = `${item.id}`;
+  let h3Teg = document.createElement("h3");
+  h3Teg.innerText = `${item.title}`;
 
-    mainPostDiv.appendChild(h2Teg);
-    mainPostDiv.appendChild(h3Teg);
+  mainPostDiv.appendChild(h2Teg);
+  mainPostDiv.appendChild(h3Teg);
 
-    mainDiv.appendChild(mainPostDiv);
-    console.log(mainPostDiv);
-  }
+  mainDiv.appendChild(mainPostDiv);
+  console.log(mainPostDiv);
 }
 
-ajax();
 
 2;
 fetch("https://reqres.in/api/users?page=2", {
